@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
-use App\User;
+use App\DTO\UserDTO;
 
 interface UserRepositoryInterface
 {
     public function buscarUsuarioPorIdentificacion(string $documentoIdentidad): array;
-    public function guardar(User $usuario): void;
-    public function actualizar(User $usuario): void;
-    public function eliminar(User $usuario): void;
+    public function guardar(UserDTO $usuario): void;
+    public function actualizar(UserDTO $usuario): void;
+    public function eliminar(UserDTO $usuario): void;
 }

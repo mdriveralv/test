@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\UserDTO;
 use App\User;
 
 class UserRepository implements UserRepositoryInterface
@@ -13,13 +14,27 @@ class UserRepository implements UserRepositoryInterface
         return array_filter($this->usuarios, fn($usr) => $usr->getDocumentoIdentidad() === $documentoIdentidad);
     }
 
-    public function guardar(User $usuario): void
+    public function guardar(UserDTO $dataUsuario): void
     {
+        $usuario = new User(
+            $dataUsuario->nombre,
+            $dataUsuario->correoElectronico,
+            $dataUsuario->contrasena,
+            $dataUsuario->documentoIdentidad
+        );
+
         $this->usuarios[] = $usuario;
     }
 
-    public function actualizar(User $usuario): void
+    public function actualizar(UserDTO $dataUsuario): void
     {
+        $usuario = new User(
+            $dataUsuario->nombre,
+            $dataUsuario->correoElectronico,
+            $dataUsuario->contrasena,
+            $dataUsuario->documentoIdentidad
+        );
+
         foreach ($this->usuarios as $usr) {
             if ($usuario = $usr) {
                 $usr = $usuario;
@@ -27,8 +42,15 @@ class UserRepository implements UserRepositoryInterface
         }
     }
 
-    public function eliminar(User $usuario): void
+    public function eliminar(UserDTO $dataUsuario): void
     {
+        $usuario = new User(
+            $dataUsuario->nombre,
+            $dataUsuario->correoElectronico,
+            $dataUsuario->contrasena,
+            $dataUsuario->documentoIdentidad
+        );
+
         $this->usuarios = array_filter($this->usuarios, fn($usr) => $usr !== $usuario);
     }
 }
